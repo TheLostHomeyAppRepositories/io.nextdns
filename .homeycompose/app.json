@@ -18,6 +18,11 @@
     "internet"
   ],
   "brandColor": "#007FFE",
+  "bugs": {
+    "url": "https://github.com/smarthomesven/homey-nextdns/issues"
+  },
+  "homeyCommunityTopicId": 144903,
+  "source": "https://github.com/smarthomesven/homey-nextdns",
   "permissions": [],
   "images": {
     "small": "/assets/images/small.png",
