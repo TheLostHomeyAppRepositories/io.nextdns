@@ -106,10 +106,6 @@ module.exports = class ProfileDriver extends Homey.Driver {
           'X-Api-Key': `${key}`
         }
       });
-      const statsdata = response.data;
-      if (statsdata.errors && statsdata.errors[0].code === "authRequired") {
-          throw new Error("Invalid API key.");
-      };
       device.setAvailable();
       const blocked = response.data.data.find(item => item.status === "blocked")?.queries || 0;
       const allowed = response.data.data.find(item => item.status === "default")?.queries || 0;
@@ -118,6 +114,10 @@ module.exports = class ProfileDriver extends Homey.Driver {
       device.setCapabilityValue("blocked_dns_requests", blocked);
       device.setCapabilityValue("allowed_dns_requests", allowed);
     } catch (error) {
+      if (error.response && error.response.status === 403) {
+        device.setUnavailable("Invalid API Key").catch(this.error);
+        return;
+      }
       this.error("Error while checking device status: " + error.message);
       device.setUnavailable().catch(this.error);
     }
