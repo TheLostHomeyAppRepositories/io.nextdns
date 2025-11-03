@@ -30,7 +30,7 @@
           setSaving();
           const key = keyElement.value;
           Homey.emit("apikey", { apikey: key  }).then(function (result) {
-            if (!result) {
+            if (result === false) {
               errorElement.style.display = 'block';
               setSave();
             }

@@ -14,8 +14,21 @@ module.exports = class ProfileDriver extends Homey.Driver {
 
   async onRepair(session, device) {
     session.setHandler("apikey", async (data) => {
-      this.homey.settings.set('apikey',data.apikey);
-      await session.done();
+      try {
+        const response = await axios.get('https://api.nextdns.io/profiles', {
+          headers: {
+            'X-Api-Key': `${data.apikey}`
+          }
+        });
+        this.homey.settings.set('apikey',data.apikey);
+        await session.done();
+        return true;
+      } catch (error) {
+        if (error.response && error.response.status === 403) {
+          return false;
+        }
+        throw new Error("Error during API key check: " + error.message);
+      }
     });
   }
 
@@ -39,14 +52,13 @@ module.exports = class ProfileDriver extends Homey.Driver {
             'X-Api-Key': `${data.apikey}`
           }
         });
-        const apidata = response.data;
-        if (apidata.errors && apidata.errors[0].code === "authRequired") {
-          return false;
-        };
         this.homey.settings.set('apikey',data.apikey);
         await session.showView('list_devices');
         return true;
       } catch (error) {
+        if (error.response && error.response.status === 403) {
+          return false;
+        }
         throw new Error("Error during API key check: " + error.message);
       }
     });

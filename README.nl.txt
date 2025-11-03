@@ -1,1 +1,1 @@
-Bekijk je NextDNS-statistieken en gebruik ze in je Flows
+Bekijk je NextDNS-statistieken en gebruik ze in je Flows.
