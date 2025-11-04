@@ -123,6 +123,68 @@ module.exports = class ProfileDriver extends Homey.Driver {
     }
   }
 
+  async addBlocklist(domain, device) {
+    try {
+      const key = this.homey.settings.get("apikey");
+      const profile = device.getStoreValue("id");
+      if (!domain) {
+        throw new Error("No domain provided for blocklist.");
+      }
+      if (!key) {
+        throw new Error("API key not found in storage.");
+      }
+      if (!profile) {
+        throw new Error("Profile ID not found in device store.");
+      }
+      const response = await axios.post(`https://api.nextdns.io/profiles/${profile}/denylist`, {
+        id: domain,
+        active: true
+      }, {
+        headers: {
+          'X-Api-Key': `${key}`
+        }
+      });
+      if (response.status === 204) {
+        return true;
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 403) {
+        throw new Error("Invalid API Key.");
+      }
+      throw new Error("Error while adding domain to blocklist: " + error.message);
+    }
+  }
+
+  async removeBlocklist(domain, device) {
+    try {
+      const key = this.homey.settings.get("apikey");
+      const profile = device.getStoreValue("id");
+      if (!domain) {
+        throw new Error("No domain provided for blocklist.");
+      }
+      if (!key) {
+        throw new Error("API key not found in storage.");
+      }
+      if (!profile) {
+        throw new Error("Profile ID not found in device store.");
+      }
+      const hex = Buffer.from(domain, "utf8").toString("hex");
+      const response = await axios.delete(`https://api.nextdns.io/profiles/${profile}/denylist/hex:${hex}`, {
+        headers: {
+          'X-Api-Key': `${key}`
+        }
+      });
+      if (response.status === 404 || response.status === 204) {
+        return true;
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 403) {
+        throw new Error("Invalid API Key.");
+      }
+      throw new Error("Error while adding domain to blocklist: " + error.message);
+    }
+  }
+
   /**
    * onPairListDevices is called when a user is adding a device
    * and the 'list_devices' view is called.

@@ -120,6 +120,68 @@
           }
         ]
       }
+    ],
+    "actions": [
+      {
+        "id": "add_blocklist",
+        "title": {
+          "en": "Add to blocklist",
+          "nl": "Toevoegen aan blokkeerlijst"
+        },
+        "titleFormatted": {
+          "en": "Add [[domain]] to blocklist",
+          "nl": "[[domain]] toevoegen aan blokkeerlijst"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=nextdns"
+          },
+          {
+            "type": "text",
+            "name": "domain",
+            "title": {
+              "en": "Domain",
+              "nl": "Domein"
+            },
+            "placeholder": {
+              "en": "example.com",
+              "nl": "example.com"
+            }
+          }
+        ]
+      },
+      {
+        "id": "remove_blocklist",
+        "title": {
+          "en": "Remove from blocklist",
+          "nl": "Verwijderen van blokkeerlijst"
+        },
+        "titleFormatted": {
+          "en": "Remove [[domain]] from blocklist",
+          "nl": "[[domain]] verwijderen van blokkeerlijst"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=nextdns"
+          },
+          {
+            "type": "text",
+            "name": "domain",
+            "title": {
+              "en": "Domain",
+              "nl": "Domein"
+            },
+            "placeholder": {
+              "en": "example.com",
+              "nl": "example.com"
+            }
+          }
+        ]
+      }
     ]
   },
   "drivers": [

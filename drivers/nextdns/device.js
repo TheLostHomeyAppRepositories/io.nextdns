@@ -9,6 +9,24 @@ module.exports = class ProfileDevice extends Homey.Device {
    */
   async onInit() {
     this.homey.setInterval(() => this.driver.checkStatus(this).catch(this.error), 15000);
+    const addBlocklistAction = this.homey.flow.getActionCard('add_blocklist');
+    addBlocklistAction.registerRunListener(async (args, state) => {
+      try {
+        const result = await this.driver.addBlocklist(args.domain,this); // true or false
+        return result;
+      } catch (error) {
+        throw new Error('Error adding domain to blocklist: ' + error.message);
+      }
+    });
+    const removeBlocklistAction = this.homey.flow.getActionCard('remove_blocklist');
+    removeBlocklistAction.registerRunListener(async (args, state) => {
+      try {
+        const result = await this.driver.removeBlocklist(args.domain,this); // true or false
+        return result;
+      } catch (error) {
+        throw new Error('Error adding domain to blocklist: ' + error.message);
+      }
+    });
   }
 
   /**
