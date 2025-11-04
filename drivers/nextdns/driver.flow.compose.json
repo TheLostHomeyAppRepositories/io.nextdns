@@ -114,6 +114,56 @@
           }
         }
       ]
+    },
+    {
+      "id": "add_whitelist",
+      "title": {
+        "en": "Add to whitelist",
+        "nl": "Toevoegen aan uitzonderingslijst"
+      },
+      "titleFormatted": {
+        "en": "Add [[domain]] to whitelist",
+        "nl": "[[domain]] toevoegen aan uitzonderingslijst"
+      },
+      "args": [
+        {
+          "type": "text",
+          "name": "domain",
+          "title": {
+            "en": "Domain",
+            "nl": "Domein"
+          },
+          "placeholder": {
+            "en": "example.com",
+            "nl": "example.com"
+          }
+        }
+      ]
+    },
+    {
+      "id": "remove_whitelist",
+      "title": {
+        "en": "Remove from whitelist",
+        "nl": "Verwijderen van uitzonderingslijst"
+      },
+      "titleFormatted": {
+        "en": "Remove [[domain]] from whitelist",
+        "nl": "[[domain]] verwijderen van uitzonderingslijst"
+      },
+      "args": [
+        {
+          "type": "text",
+          "name": "domain",
+          "title": {
+            "en": "Domain",
+            "nl": "Domein"
+          },
+          "placeholder": {
+            "en": "example.com",
+            "nl": "example.com"
+          }
+        }
+      ]
     }
   ]
 }

@@ -27,6 +27,24 @@ module.exports = class ProfileDevice extends Homey.Device {
         throw new Error('Error adding domain to blocklist: ' + error.message);
       }
     });
+    const addWhitelistAction = this.homey.flow.getActionCard('add_whitelist');
+    addWhitelistAction.registerRunListener(async (args, state) => {
+      try {
+        const result = await this.driver.addWhitelist(args.domain,this);
+        return result;
+      } catch (error) {
+        throw new Error('Error adding domain to whitelist: ' + error.message);
+      }
+    });
+    const removeWhitelistAction = this.homey.flow.getActionCard('remove_whitelist');
+    removeWhitelistAction.registerRunListener(async (args, state) => {
+      try {
+        const result = await this.driver.removeWhitelist(args.domain,this);
+        return result;
+      } catch (error) {
+        throw new Error('Error adding domain to whitelist: ' + error.message);
+      }
+    });
   }
 
   /**
