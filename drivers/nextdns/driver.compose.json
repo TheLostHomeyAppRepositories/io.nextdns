@@ -3,7 +3,7 @@
     "en": "Profile",
     "nl": "Profiel"
   },
-  "class": "sensor",
+  "class": "service",
   "capabilities": [
     "blocked_dns_requests",
     "allowed_dns_requests",

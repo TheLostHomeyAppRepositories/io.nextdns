@@ -1,7 +1,7 @@
 {
   "id": "io.nextdns",
   "version": "1.0.8",
-  "compatibility": ">=5.0.0",
+  "compatibility": ">=12.3.0",
   "sdk": 3,
   "platforms": [
     "local"
