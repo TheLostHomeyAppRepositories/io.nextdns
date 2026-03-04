@@ -52,5 +52,8 @@
   },
   "1.0.17": {
     "en": "Fix README"
+  },
+  "1.0.18": {
+    "en": "Fixed unavailable status"
   }
 }
