@@ -91,5 +91,8 @@
   },
   "1.0.30": {
     "en": "Update dependencies"
+  },
+  "1.0.31": {
+    "en": "Added Push SDK"
   }
 }
