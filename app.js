@@ -1,6 +1,7 @@
 'use strict';
 
 const Homey = require('homey');
+const HomeyPush = require('./lib/push');
 
 module.exports = class NextDnsApp extends Homey.App {
 
@@ -9,6 +10,12 @@ module.exports = class NextDnsApp extends Homey.App {
    */
   async onInit() {
     this.log('NextDNS has been initialized');
+    this.push = new HomeyPush(this);
+    await this.push.startPush();
+  }
+
+  async onUninit() {
+    this.push.stopPush();
   }
 
 };
